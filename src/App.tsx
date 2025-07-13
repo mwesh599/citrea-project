@@ -13,28 +13,32 @@ import AIAssistant from "./pages/AIAssistant";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
+// ✅ RainbowKit + Wagmi Wallet Support
+import { WalletProvider } from "@/providers/WalletProvider";
+
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/identity" element={<Identity />} />
-            <Route path="/credentials" element={<Credentials />} />
-            <Route path="/reputation" element={<Reputation />} />
-            <Route path="/zklogin" element={<ZkLogin />} />
-            <Route path="/ai-assistant" element={<AIAssistant />} />
-            <Route path="/settings" element={<Settings />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      <WalletProvider>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/identity" element={<Identity />} />
+              <Route path="/credentials" element={<Credentials />} />
+              <Route path="/reputation" element={<Reputation />} />
+              <Route path="/zklogin" element={<ZkLogin />} />
+              <Route path="/ai-assistant" element={<AIAssistant />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+        <Toaster />
+        <Sonner />
+      </WalletProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
