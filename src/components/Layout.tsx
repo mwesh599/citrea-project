@@ -1,11 +1,24 @@
+import { useEffect, useState } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { WalletConnect } from "@/components/WalletConnect";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Bell, Menu } from "lucide-react";
+import { Bell, Menu, Moon, Sun } from "lucide-react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [isDark, setIsDark] = useState(true); // Default to dark theme
+
+  useEffect(() => {
+    // Apply dark theme by default
+    document.documentElement.classList.add('dark');
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDark(!isDark);
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-background">
@@ -31,6 +44,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </div>
               
               <div className="flex items-center gap-4">
+                <Button variant="ghost" size="sm" onClick={toggleTheme}>
+                  {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </Button>
                 <Button variant="ghost" size="sm" className="relative">
                   <Bell className="w-4 h-4" />
                   <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full flex items-center justify-center">
