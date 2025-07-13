@@ -14,7 +14,7 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 // ✅ RainbowKit + Wagmi Wallet Support
-import { WalletProvider } from "@/providers/WalletProvider";
+import { WalletProvider } from "@/wallet/WalletProvider";
 
 const queryClient = new QueryClient();
 
